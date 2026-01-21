@@ -30,7 +30,7 @@ codecov-mcp-server
 ### From Source
 
 ```bash
-git clone https://github.com/yourusername/codecov-mcp-server.git
+git clone https://github.com/turquoisedragon2926/codecov-mcp-server.git
 cd codecov-mcp-server
 npm install
 npm run build
