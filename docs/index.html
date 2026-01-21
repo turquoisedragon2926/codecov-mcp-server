@@ -344,7 +344,7 @@
 
     <section>
       <h2 class="section-title">Quick Start</h2>
-      <p class="section-desc">Get your token and add to Claude Code config.</p>
+      <p class="section-desc">Get your token and add to Claude Code.</p>
       <div class="code-panels">
         <div class="code-panel">
           <div class="panel-header">
@@ -356,23 +356,19 @@
 <span class="cmd">https://app.codecov.io/account/access</span>
 
 <span class="comment"># Generate token</span>
-<span class="comment"># Copy for config below</span>
+<span class="comment"># Copy for command below</span>
           </div>
         </div>
         <div class="code-panel">
           <div class="panel-header">
             <span class="dot blue"></span>
-            CONFIG
+            INSTALL
           </div>
           <div class="panel-code">
-<span class="comment"># ~/.claude.json or project settings</span>
-<span class="cmd">"mcpServers": {</span>
-<span class="cmd">  "codecov": {</span>
-<span class="cmd">    "command": "npx",</span>
-<span class="cmd">    "args": ["codecov-mcp-server"],</span>
-<span class="cmd">    "env": { "CODECOV_API_TOKEN": "..." }</span>
-<span class="cmd">  }</span>
-<span class="cmd">}</span>
+<span class="comment"># Add to Claude Code</span>
+<span class="cmd">claude mcp add codecov \</span>
+<span class="cmd">  -e CODECOV_API_TOKEN=xxx \</span>
+<span class="cmd">  -- npx codecov-mcp-server</span>
           </div>
         </div>
       </div>

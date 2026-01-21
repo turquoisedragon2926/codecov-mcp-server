@@ -46,7 +46,15 @@ npm run build
 
 ### Claude Code Configuration
 
-Add to your Claude Code MCP settings (`~/.claude/claude_desktop_config.json` or project `.claude/settings.json`):
+**Option 1: Using `claude mcp add` (Recommended)**
+
+```bash
+claude mcp add codecov -e CODECOV_API_TOKEN=your-token-here -- npx codecov-mcp-server
+```
+
+**Option 2: Manual JSON config**
+
+Add to your Claude Code MCP settings (`~/.claude.json` or project `.claude/settings.json`):
 
 ```json
 {
