@@ -3,26 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codecov MCP Server</title>
+  <title>codecov-mcp</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-primary: #0a0a0a;
-      --bg-secondary: #111111;
-      --bg-tertiary: #1a1a1a;
-      --text-primary: #ededed;
-      --text-secondary: #a1a1a1;
-      --text-muted: #666666;
-      --accent-blue: #0070f3;
-      --accent-blue-hover: #0060df;
-      --accent-green: #00d67d;
-      --accent-green-dim: #00a060;
-      --border-color: #2a2a2a;
-      --code-bg: #161616;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -30,521 +15,439 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0a;
+      color: #888;
       line-height: 1.6;
-      min-height: 100vh;
+      font-size: 14px;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 880px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     /* Header */
     header {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border-color);
+      padding: 48px 0 0;
     }
 
-    .header-content {
+    .header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 12px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
-    }
-
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .logo-text {
-      font-weight: 600;
-      font-size: 18px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-primary);
-    }
-
-    /* Hero */
-    .hero {
-      padding: 100px 0 80px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 20px;
+    .title {
+      font-size: 24px;
+      font-weight: 500;
+      color: #fff;
       letter-spacing: -0.02em;
     }
 
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 40px;
-    }
-
-    .hero-buttons {
+    .header-links {
       display: flex;
+      align-items: center;
       gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
     }
 
-    .btn {
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
+    .badge {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .github-link {
+      color: #666;
       text-decoration: none;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: var(--accent-blue);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-blue-hover);
-    }
-
-    .btn-secondary {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-      border: 1px solid var(--border-color);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-secondary);
-      border-color: var(--text-muted);
-    }
-
-    /* Features */
-    .features {
-      padding: 80px 0;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .features h2 {
-      font-size: 32px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 24px;
-      transition: border-color 0.2s;
-    }
-
-    .feature-card:hover {
-      border-color: var(--text-muted);
-    }
-
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--bg-tertiary);
-      border-radius: 8px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 20px;
     }
 
-    .feature-card h3 {
-      font-size: 16px;
-      font-weight: 600;
+    .github-link:hover {
+      color: #888;
+    }
+
+    .description {
+      color: #888;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* Install command */
+    .install-cmd {
+      margin-top: 32px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    /* Sections */
+    section {
+      margin-top: 64px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: #666;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
 
-    .feature-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Quick Start */
-    .quickstart {
-      padding: 80px 0;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .quickstart h2 {
-      font-size: 32px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .quickstart > p {
-      text-align: center;
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-    }
-
-    .code-block {
-      background: var(--code-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      overflow: hidden;
+    .section-desc {
+      color: #888;
       margin-bottom: 24px;
     }
 
-    .code-header {
-      background: var(--bg-tertiary);
-      padding: 12px 16px;
+    /* Use cases grid */
+    .use-cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #222;
+      border: 1px solid #222;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .use-case {
+      background: #111;
+      padding: 20px;
+    }
+
+    .use-case h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .use-case p {
       font-size: 13px;
-      color: var(--text-secondary);
-      border-bottom: 1px solid var(--border-color);
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .use-case code {
+      color: #f97316;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+    }
+
+    /* Code panels */
+    .code-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #222;
+      border: 1px solid #222;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .code-panel {
+      background: #111;
+    }
+
+    .panel-header {
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #666;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .code-header::before {
-      content: '';
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      background: var(--accent-green);
+    .panel-header .dot {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
     }
 
-    .code-content {
-      padding: 20px;
-      overflow-x: auto;
+    .panel-header .dot.green { background: #22c55e; }
+    .panel-header .dot.blue { background: #3b82f6; }
+
+    .panel-code {
+      padding: 16px;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #888;
     }
 
-    .code-content pre {
-      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
-      font-size: 13px;
-      line-height: 1.7;
-      margin: 0;
+    .panel-code .comment {
+      color: #444;
     }
 
-    .code-content code {
-      color: var(--text-primary);
+    .panel-code .cmd {
+      color: #ccc;
     }
 
-    .code-content .comment {
-      color: var(--text-muted);
-    }
-
-    .code-content .string {
-      color: var(--accent-green);
-    }
-
-    .code-content .keyword {
-      color: var(--accent-blue);
-    }
-
-    /* Tools Section */
-    .tools {
-      padding: 80px 0;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .tools h2 {
-      font-size: 32px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .tools-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .tool-item {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
+    /* Tools table */
+    .tools-table {
+      border: 1px solid #222;
       border-radius: 8px;
-      padding: 16px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
+      overflow: hidden;
+    }
+
+    .tools-header {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      background: #111;
+      border-bottom: 1px solid #222;
+      padding: 12px 16px;
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      padding: 12px 16px;
+      border-bottom: 1px solid #181818;
+    }
+
+    .tool-row:last-child {
+      border-bottom: none;
     }
 
     .tool-name {
       font-family: 'SF Mono', Monaco, monospace;
-      font-size: 13px;
-      color: var(--accent-green);
-      background: var(--bg-tertiary);
-      padding: 4px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
+      font-size: 12px;
+      color: #ccc;
     }
 
     .tool-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* Config section */
+    .config-block {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .config-header {
+      padding: 12px 16px;
+      font-size: 12px;
+      color: #666;
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .config-code {
+      padding: 16px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #888;
+    }
+
+    .config-code .key {
+      color: #ccc;
+    }
+
+    .config-code .string {
+      color: #22c55e;
     }
 
     /* Footer */
     footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 14px;
-      color: var(--text-muted);
+      margin-top: 80px;
+      padding: 24px 0;
+      border-top: 1px solid #181818;
+      font-size: 12px;
+      color: #444;
     }
 
     footer a {
-      color: var(--text-secondary);
+      color: #666;
       text-decoration: none;
     }
 
     footer a:hover {
-      color: var(--text-primary);
+      color: #888;
     }
 
     /* Responsive */
-    @media (max-width: 640px) {
-      .hero h1 {
-        font-size: 32px;
+    @media (max-width: 720px) {
+      .use-cases {
+        grid-template-columns: 1fr;
       }
 
-      .hero p {
-        font-size: 16px;
+      .code-panels {
+        grid-template-columns: 1fr;
       }
 
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
+      .tools-header,
+      .tool-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
       }
 
-      .nav-links {
+      .tools-header span:last-child {
         display: none;
-      }
-
-      .tool-item {
-        flex-direction: column;
-        gap: 8px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="#" class="logo">
-          <div class="logo-icon">C</div>
-          <span class="logo-text">codecov-mcp</span>
-        </a>
-        <nav class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#quickstart">Quick Start</a>
-          <a href="#tools">Tools</a>
-          <a href="https://github.com/turquoisedragon2926/codecov-mcp-server">GitHub</a>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Check coverage with <span>Claude Code</span></h1>
-        <p>An MCP server that connects Claude Code to Codecov. Check coverage, find untested code, and compare branches before you push.</p>
-        <div class="hero-buttons">
-          <a href="#quickstart" class="btn btn-primary">Get Started</a>
-          <a href="https://github.com/turquoisedragon2926/codecov-mcp-server" class="btn btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+  <div class="container">
+    <header>
+      <div class="header-row">
+        <h1 class="title">codecov-mcp</h1>
+        <div class="header-links">
+          <span class="badge">MIT</span>
+          <a href="https://github.com/turquoisedragon2926/codecov-mcp-server" class="github-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>
-            View on GitHub
           </a>
         </div>
       </div>
+      <p class="description">MCP server for Codecov. Query coverage data from Claude Code to check files, compare branches, and find untested code.</p>
+      <div class="install-cmd">npx codecov-mcp-server</div>
+    </header>
+
+    <section>
+      <h2 class="section-title">Use Cases</h2>
+      <p class="section-desc">Check coverage without leaving your editor.</p>
+      <div class="use-cases">
+        <div class="use-case">
+          <h3>Pre-push Checks</h3>
+          <p>Ask Claude to check coverage before pushing. Catch missing tests early.</p>
+        </div>
+        <div class="use-case">
+          <h3>File Analysis</h3>
+          <p>Get line-by-line coverage for any file. See exactly which lines need tests.</p>
+        </div>
+        <div class="use-case">
+          <h3>PR Review</h3>
+          <p>Compare coverage between branches. Understand the impact of your changes.</p>
+        </div>
+      </div>
     </section>
 
-    <section class="features" id="features">
-      <div class="container">
-        <h2>Features</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>Coverage Totals</h3>
-            <p>Get overall coverage metrics for any repository including lines, hits, misses, and branch coverage.</p>
+    <section>
+      <h2 class="section-title">Quick Start</h2>
+      <p class="section-desc">Get your token and add to Claude Code config.</p>
+      <div class="code-panels">
+        <div class="code-panel">
+          <div class="panel-header">
+            <span class="dot green"></span>
+            TOKEN
           </div>
-          <div class="feature-card">
-            <div class="feature-icon">📄</div>
-            <h3>File Coverage</h3>
-            <p>Drill down into specific files to see line-by-line coverage and identify exactly which lines need tests.</p>
+          <div class="panel-code">
+<span class="comment"># Get API token</span>
+<span class="cmd">https://app.codecov.io/account/access</span>
+
+<span class="comment"># Generate token</span>
+<span class="comment"># Copy for config below</span>
           </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔀</div>
-            <h3>Compare Branches</h3>
-            <p>Compare coverage between commits, branches, or pull requests to understand the impact of changes.</p>
+        </div>
+        <div class="code-panel">
+          <div class="panel-header">
+            <span class="dot blue"></span>
+            CONFIG
           </div>
-          <div class="feature-card">
-            <div class="feature-icon">🌳</div>
-            <h3>Coverage Tree</h3>
-            <p>Browse coverage hierarchically by directory to find areas of your codebase with low coverage.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔄</div>
-            <h3>Development Loop</h3>
-            <p>Write code, check coverage, add tests, verify—all within your Claude Code workflow.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🚀</div>
-            <h3>Easy Setup</h3>
-            <p>Just add to your Claude Code config and you're ready to go. Supports both stdio and HTTP transports.</p>
+          <div class="panel-code">
+<span class="comment"># ~/.claude.json or project settings</span>
+<span class="cmd">"mcpServers": {</span>
+<span class="cmd">  "codecov": {</span>
+<span class="cmd">    "command": "npx",</span>
+<span class="cmd">    "args": ["codecov-mcp-server"],</span>
+<span class="cmd">    "env": { "CODECOV_API_TOKEN": "..." }</span>
+<span class="cmd">  }</span>
+<span class="cmd">}</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="quickstart" id="quickstart">
-      <div class="container">
-        <h2>Quick Start</h2>
-        <p>Get up and running in two steps.</p>
-
-        <div class="code-block">
-          <div class="code-header">1. Get your Codecov API token</div>
-          <div class="code-content">
-            <pre><code><span class="comment"># Visit https://app.codecov.io/account/access</span>
-<span class="comment"># Click "Generate Token" and copy it</span></code></pre>
-          </div>
+    <section>
+      <h2 class="section-title">Available Tools</h2>
+      <p class="section-desc">8 tools for querying Codecov data.</p>
+      <div class="tools-table">
+        <div class="tools-header">
+          <span>Tool</span>
+          <span>Description</span>
         </div>
-
-        <div class="code-block">
-          <div class="code-header">2. Add to Claude Code config</div>
-          <div class="code-content">
-            <pre><code>{
-  <span class="string">"mcpServers"</span>: {
-    <span class="string">"codecov"</span>: {
-      <span class="string">"command"</span>: <span class="string">"npx"</span>,
-      <span class="string">"args"</span>: [<span class="string">"codecov-mcp-server"</span>],
-      <span class="string">"env"</span>: {
-        <span class="string">"CODECOV_API_TOKEN"</span>: <span class="string">"your-token-here"</span>
-      }
-    }
-  }
-}</code></pre>
-          </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_get_coverage_totals</span>
+          <span class="tool-desc">Overall coverage metrics for a repository</span>
         </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_get_file_coverage</span>
+          <span class="tool-desc">Line-by-line coverage for a specific file</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_get_coverage_tree</span>
+          <span class="tool-desc">Hierarchical coverage report by directory</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_compare_coverage</span>
+          <span class="tool-desc">Compare coverage between commits or PRs</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_list_repositories</span>
+          <span class="tool-desc">List repositories with coverage data</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_get_repository</span>
+          <span class="tool-desc">Detailed repository information</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_list_commits</span>
+          <span class="tool-desc">Commits with coverage data</span>
+        </div>
+        <div class="tool-row">
+          <span class="tool-name">codecov_list_pulls</span>
+          <span class="tool-desc">Pull requests with coverage info</span>
+        </div>
+      </div>
+    </section>
 
-        <div class="code-block">
-          <div class="code-header">3. Start using with Claude Code</div>
-          <div class="code-content">
-            <pre><code><span class="comment"># Check repository coverage</span>
-<span class="string">"What's the coverage for my-org/my-repo?"</span>
+    <section>
+      <h2 class="section-title">Example Prompts</h2>
+      <p class="section-desc">What to ask Claude Code.</p>
+      <div class="config-block">
+        <div class="config-header">
+          <span class="dot green"></span>
+          PROMPTS
+        </div>
+        <div class="config-code">
+<span class="comment"># Check repo coverage</span>
+<span class="cmd">"What's the coverage for owner/repo?"</span>
 
 <span class="comment"># Check specific file</span>
-<span class="string">"What lines need tests in src/api/handler.ts?"</span>
+<span class="cmd">"Which lines need tests in src/utils.ts?"</span>
 
 <span class="comment"># Compare branches</span>
-<span class="string">"Compare coverage between main and feature-branch"</span></code></pre>
-          </div>
+<span class="cmd">"Compare coverage between main and my-branch"</span>
+
+<span class="comment"># Review PR</span>
+<span class="cmd">"What's the coverage impact of PR #42?"</span>
         </div>
       </div>
     </section>
 
-    <section class="tools" id="tools">
-      <div class="container">
-        <h2>Available Tools</h2>
-        <div class="tools-list">
-          <div class="tool-item">
-            <span class="tool-name">codecov_get_coverage_totals</span>
-            <span class="tool-desc">Get overall coverage metrics for a repository</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_get_file_coverage</span>
-            <span class="tool-desc">Get line-by-line coverage for a specific file</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_get_coverage_tree</span>
-            <span class="tool-desc">Get hierarchical coverage report by directory</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_compare_coverage</span>
-            <span class="tool-desc">Compare coverage between commits, branches, or PRs</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_list_repositories</span>
-            <span class="tool-desc">List repositories for an owner with coverage data</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_get_repository</span>
-            <span class="tool-desc">Get detailed repository information</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_list_commits</span>
-            <span class="tool-desc">List commits with coverage data</span>
-          </div>
-          <div class="tool-item">
-            <span class="tool-name">codecov_list_pulls</span>
-            <span class="tool-desc">List pull requests with coverage information</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>Built with <a href="https://modelcontextprotocol.io">MCP</a> for <a href="https://claude.ai/code">Claude Code</a></p>
-    </div>
-  </footer>
+    <footer>
+      Built for <a href="https://modelcontextprotocol.io">MCP</a> · <a href="https://github.com/turquoisedragon2926/codecov-mcp-server">Source</a>
+    </footer>
+  </div>
 </body>
 </html>
